@@ -8,7 +8,6 @@ import pandas as pd
 #insert API key
 API_KEY = 'YOUR-API-KEY-GOES-HERE'
 
-
 def get_summoner_info(summoner_name):
     api_url = f'https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summoner_name}?api_key={API_KEY}'
     resp = requests.get(api_url)
@@ -162,6 +161,9 @@ def main():
     if sample_size > count:
         sample_size = int(input("Invalid input, please enter a number less than the number of matches: "))
     mu = float(input("Enter average game duration in seconds, μ, desired: "))
+    if mu is not float or int:
+        mu = float(input("Invalid input, please enter average game duration in seconds, μ, desired: "))
+
     print("Gathering information, please wait...")
     p_value = get_average_stats(summoner_name, sample_size, count, type, mu)
 
